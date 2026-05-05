@@ -15,11 +15,13 @@ The referral and affiliate system is built around tracking events across time �
 ## What This Service Does
 
 **Casual Referral Programme (any buyer)**
+
 - Generates a unique referral link for every registered buyer automatically — no application needed
 - Tracks when someone signs up using that link and credits the referrer with a store credit reward once the new buyer completes their first purchase
 - Shows each buyer a simple referral dashboard: how many people they have referred and how much credit they have earned
 
 **Formal Affiliate Programme (application required)**
+
 - Allows any buyer to apply to become a formal affiliate — content creators, bloggers, and influencers with an audience
 - Admins review and approve affiliate applications with the ability to set a custom commission rate and tier
 - Issues approved affiliates a unique affiliate ID embedded in shareable product links
