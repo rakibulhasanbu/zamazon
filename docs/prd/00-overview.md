@@ -42,7 +42,7 @@ All frontends communicate exclusively through the **api-gateway** (port 8000). N
 | #   | Service                | Tech   | Port | DB         |
 | --- | ---------------------- | ------ | ---- | ---------- |
 | 13  | review-service         | NestJS | 8006 | PostgreSQL |
-| 14  | recommendation-service | Django | 8201 | PostgreSQL |
+| 14  | recommendation-service | NestJS | 8201 | PostgreSQL |
 | 15  | deals-service          | NestJS | 8007 | PostgreSQL |
 | 16  | promo-service          | NestJS | 8008 | PostgreSQL |
 | 17  | loyalty-service        | NestJS | 8009 | PostgreSQL |
@@ -53,7 +53,7 @@ All frontends communicate exclusively through the **api-gateway** (port 8000). N
 
 | #   | Service          | Tech   | Port | DB         |
 | --- | ---------------- | ------ | ---- | ---------- |
-| 20  | seller-service   | Django | 8203 | PostgreSQL |
+| 20  | seller-service   | NestJS | 8203 | PostgreSQL |
 | 21  | ads-service      | NestJS | 8012 | PostgreSQL |
 | 22  | referral-service | NestJS | 8013 | PostgreSQL |
 
@@ -61,8 +61,8 @@ All frontends communicate exclusively through the **api-gateway** (port 8000). N
 
 | #   | Service           | Tech   | Port | DB         |
 | --- | ----------------- | ------ | ---- | ---------- |
-| 23  | analytics-service | Django | 8202 | PostgreSQL |
-| 24  | admin-bff         | Django | 8204 | PostgreSQL |
+| 23  | analytics-service | Go     | 8202 | PostgreSQL |
+| 24  | admin-bff         | NestJS | 8204 | PostgreSQL |
 | 25  | dispute-service   | NestJS | 8014 | PostgreSQL |
 | 26  | fraud-service     | Go     | 8107 | PostgreSQL |
 | 27  | audit-log-service | Go     | 8108 | PostgreSQL |

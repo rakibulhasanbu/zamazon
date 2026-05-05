@@ -8,7 +8,7 @@
 
 ## Why NestJS
 
-Flash Deals and Lightning Deals are time-driven — they activate at a scheduled moment, run for a fixed window, and expire automatically. NestJS has a built-in task scheduler (cron jobs) and event emitter that handle this lifecycle cleanly without external tooling. The event-driven nature of deal activation and expiry — which must notify search-service and product-service in real time — fits naturally into NestJS's Kafka integration. Go would work but lacks the scheduler ecosystem; Django's Celery setup adds more operational complexity than needed for this service.
+Flash Deals and Lightning Deals are time-driven — they activate at a scheduled moment, run for a fixed window, and expire automatically. NestJS has a built-in task scheduler (cron jobs) and event emitter that handle this lifecycle cleanly without external tooling. The event-driven nature of deal activation and expiry — which must notify search-service and product-service in real time — fits naturally into NestJS's Kafka integration. Go would work but lacks the scheduler ecosystem.
 
 ---
 

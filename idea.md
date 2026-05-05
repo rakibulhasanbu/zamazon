@@ -2,7 +2,7 @@
 
 ## Vision
 
-A portfolio-grade, production-minded e-commerce platform built on a microservices architecture. Every technology choice is deliberate — NestJS, Go, and Django are each used where they perform best, not interchangeably.
+A portfolio-grade, production-minded e-commerce platform built on a microservices architecture. Every technology choice is deliberate — NestJS and Go are each used where they perform best, not interchangeably.
 
 **Core user journeys:**
 Browse products → Search & filter → Add to cart → Checkout → Pay → Track order
@@ -46,17 +46,17 @@ Services are ordered by build priority — P1 must work before P2 can be built, 
 | 11  | wallet-service         | Go     | 4004 | PostgreSQL    | P1 Core   |
 | 12  | notification-service   | NestJS | 3005 | PostgreSQL    | P1 Core   |
 | 13  | review-service         | NestJS | 3006 | PostgreSQL    | P2 Buyer  |
-| 14  | recommendation-service | Django | 5001 | PostgreSQL    | P2 Buyer  |
+| 14  | recommendation-service | NestJS | 5001 | PostgreSQL    | P2 Buyer  |
 | 15  | deals-service          | NestJS | 3007 | PostgreSQL    | P2 Buyer  |
 | 16  | promo-service          | NestJS | 3008 | PostgreSQL    | P2 Buyer  |
 | 17  | loyalty-service        | NestJS | 3009 | PostgreSQL    | P2 Buyer  |
 | 18  | messaging-service      | NestJS | 3010 | PostgreSQL    | P2 Buyer  |
 | 19  | support-service        | NestJS | 3011 | PostgreSQL    | P2 Buyer  |
-| 20  | seller-service         | Django | 5003 | PostgreSQL    | P3 Seller |
+| 20  | seller-service         | NestJS | 5003 | PostgreSQL    | P3 Seller |
 | 21  | ads-service            | NestJS | 3012 | PostgreSQL    | P3 Seller |
 | 22  | referral-service       | NestJS | 3013 | PostgreSQL    | P3 Seller |
-| 23  | analytics-service      | Django | 5002 | PostgreSQL    | P4 Ops    |
-| 24  | admin-bff              | Django | 5004 | PostgreSQL    | P4 Ops    |
+| 23  | analytics-service      | Go     | 5002 | PostgreSQL    | P4 Ops    |
+| 24  | admin-bff              | NestJS | 5004 | PostgreSQL    | P4 Ops    |
 | 25  | dispute-service        | NestJS | 3014 | PostgreSQL    | P4 Ops    |
 | 26  | fraud-service          | Go     | 4007 | PostgreSQL    | P4 Ops    |
 | 27  | audit-log-service      | Go     | 4008 | PostgreSQL    | P4 Ops    |
@@ -267,9 +267,9 @@ Each service entry lists: the tech used, why it was chosen, and the exact featur
 
 ---
 
-### 12. recommendation-service — **Django**
+### 12. recommendation-service — **NestJS**
 
-**Why Django:** Python's ML ecosystem (scikit-learn, pandas, NumPy) is the natural home for collaborative filtering and content-based recommendation algorithms.
+**Why NestJS:** Recommendation logic is complex, event-driven business logic — consuming purchase, view, and rating events from Kafka to continuously refine user preference models. NestJS's modular DI container keeps each algorithm (collaborative filtering, content similarity, cold-start fallback) as an injectable, independently testable service. Bull queues handle scheduled model retraining asynchronously. The JS ecosystem provides adequate statistical primitives (`ml-matrix`, cosine similarity, trending scorers) at portfolio scale.
 
 **Features covered:**
 
@@ -282,9 +282,9 @@ Each service entry lists: the tech used, why it was chosen, and the exact featur
 
 ---
 
-### 13. analytics-service — **Django**
+### 13. analytics-service — **Go**
 
-**Why Django:** Heavy aggregation queries and report generation benefit from pandas and Celery's async task scheduling. Django ORM handles complex GROUP BY analytics well.
+**Why Go:** Analytics is a high-throughput Kafka consumption problem — every `order.completed`, `order.cancelled`, and payment event flows here and must be aggregated across thousands of sellers in real time. Go's goroutines handle concurrent event consumption and parallel report computation with minimal memory overhead. Complex GROUP BY queries, window functions, and CTEs are written as raw SQL via `pgx`, avoiding ORM limitations. Scheduled report generation runs as goroutines on ticker intervals — no external task queue needed.
 
 **Features covered:**
 
@@ -298,9 +298,9 @@ Each service entry lists: the tech used, why it was chosen, and the exact featur
 
 ---
 
-### 14. seller-service — **Django**
+### 14. seller-service — **NestJS**
 
-**Why Django:** Django REST Framework accelerates seller-facing CRUD APIs. Django Admin gives a free internal moderation UI for the operations team.
+**Why NestJS:** The seller service is workflow-driven — KYC verification has a clear state machine (pending → under_review → approved/rejected) that maps directly onto NestJS Guards and state transition logic. class-validator enforces complex input rules on KYC document submissions and payout configurations. TypeORM handles the relational data across seller profiles, documents, and performance metrics. This service is operations-heavy, not throughput-heavy, so there is no case for Go.
 
 **Features covered:**
 
@@ -330,9 +330,9 @@ Each service entry lists: the tech used, why it was chosen, and the exact featur
 
 ---
 
-### 16. admin-bff — **Django**
+### 16. admin-bff — **NestJS**
 
-**Why Django:** Backend-for-frontend aggregating data from multiple services for the internal admin panel. Django Admin provides ready-made list/detail views that accelerate internal tooling.
+**Why NestJS:** A BFF is fundamentally API orchestration — calling 10 downstream services in parallel and composing their responses into a single shaped payload for the admin-dashboard frontend. NestJS's `Promise.all` handles concurrent service calls cleanly, Guards enforce the 6-role permission model at every route declaratively, and typed DTOs catch mismatched aggregations at compile time. TypeScript's type system makes the composition layer safe and maintainable.
 
 **Features covered:**
 
@@ -571,7 +571,7 @@ Withdrawal requests are created and tracked inside wallet-service. The actual ba
 
 ### Report — not a separate service
 
-All reporting lives in analytics-service (Django). Django's ORM + pandas handle complex aggregation well. A report-service would duplicate analytics-service with no added value.
+All reporting lives in analytics-service (Go). Raw SQL via `pgx` handles complex aggregation well and goroutines parallelize report generation across sellers. A report-service would duplicate analytics-service with no added value.
 
 ---
 

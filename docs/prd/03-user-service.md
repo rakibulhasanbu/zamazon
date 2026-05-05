@@ -8,7 +8,7 @@
 
 ## Why NestJS
 
-User profile management is rich in validation rules — address formats, phone number patterns, preference constraints, file size limits for avatars. NestJS's class-validator and TypeORM handle all of this declaratively without boilerplate. The service also reacts to events from auth-service and order-service, and NestJS's event-driven module makes this straightforward. Go would require building a validation framework from scratch; Django would work but is heavier than needed for a profile-focused service.
+User profile management is rich in validation rules — address formats, phone number patterns, preference constraints, file size limits for avatars. NestJS's class-validator and TypeORM handle all of this declaratively without boilerplate. The service also reacts to events from auth-service and order-service, and NestJS's event-driven module makes this straightforward. Go would require building a validation framework from scratch.
 
 ---
 

@@ -8,7 +8,7 @@
 
 ## Why Go
 
-Fraud detection sits directly in the payment flow — every payment attempt is scored before the charge is processed. If this service is slow, checkout is slow. Go's concurrent rule evaluation runs multiple fraud checks in parallel in microseconds without blocking the payment request. There are no garbage collection pauses that could spike latency at the worst possible moment. The service is also purely computational — it reads signals, runs rules, and emits a score — with no complex business logic that would benefit from NestJS or Django's abstractions.
+Fraud detection sits directly in the payment flow — every payment attempt is scored before the charge is processed. If this service is slow, checkout is slow. Go's concurrent rule evaluation runs multiple fraud checks in parallel in microseconds without blocking the payment request. There are no garbage collection pauses that could spike latency at the worst possible moment. The service is also purely computational — it reads signals, runs rules, and emits a score — with no complex business logic that would benefit from a higher-level framework's abstractions.
 
 ---
 

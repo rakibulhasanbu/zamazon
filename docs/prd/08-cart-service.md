@@ -8,7 +8,7 @@
 
 ## Why NestJS
 
-The shopping cart lives primarily in Redis — a fast in-memory store — and needs to react to real-time events like price changes and stock updates. NestJS has a first-class Redis integration module and an event-driven architecture that makes syncing the cart with live product data clean and straightforward. The service also needs to coordinate with promo-service for coupon validation, which fits naturally into NestJS's injectable service pattern. Go would work but has no equivalent Redis client ecosystem for this pattern; Django would be heavier than needed for a session-focused service.
+The shopping cart lives primarily in Redis — a fast in-memory store — and needs to react to real-time events like price changes and stock updates. NestJS has a first-class Redis integration module and an event-driven architecture that makes syncing the cart with live product data clean and straightforward. The service also needs to coordinate with promo-service for coupon validation, which fits naturally into NestJS's injectable service pattern. Go would work but has no equivalent Redis client ecosystem for this pattern.
 
 ---
 

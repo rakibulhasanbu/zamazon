@@ -8,7 +8,7 @@
 
 ## Why NestJS
 
-Notifications need to be delivered through multiple channels — email, SMS, in-app real-time alerts, and push notifications — each with its own third-party provider. NestJS has first-class support for Bull (a background job queue for scheduling and retrying sends), WebSocket gateways (for real-time in-app alerts), and adapter patterns that make plugging in SendGrid, Twilio, Firebase, and others clean and consistent. Managing all these providers in Go would require building the queue and adapter system from scratch; Django's async support is less mature for high-throughput WebSocket connections.
+Notifications need to be delivered through multiple channels — email, SMS, in-app real-time alerts, and push notifications — each with its own third-party provider. NestJS has first-class support for Bull (a background job queue for scheduling and retrying sends), WebSocket gateways (for real-time in-app alerts), and adapter patterns that make plugging in SendGrid, Twilio, Firebase, and others clean and consistent. Managing all these providers in Go would require building the queue and adapter system from scratch.
 
 ---
 

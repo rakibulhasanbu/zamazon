@@ -1,14 +1,14 @@
 # Admin BFF (Backend for Frontend)
 
-**Technology:** Django
+**Technology:** NestJS
 **Port:** 8204
 **Priority:** P4 — Platform Operations
 
 ---
 
-## Why Django
+## Why NestJS
 
-The admin dashboard needs to display aggregated data that spans many services — a user detail page shows their orders, their wallet balance, their dispute history, and their review activity all in one view. Assembling that from multiple services is data aggregation work that Django handles cleanly. Django Admin also provides a ready-made, production-quality interface for internal operations without building it from scratch. DRF makes exposing aggregated data to the admin-dashboard frontend straightforward.
+A BFF is fundamentally an API orchestration layer — it calls multiple downstream services in parallel and composes their responses into a single shaped payload for the admin-dashboard frontend. NestJS excels at this: `Promise.all` for concurrent service calls, Guards for permission enforcement at every route, and typed DTOs for each aggregated response (user detail = profile + orders + wallet + disputes + tickets). The admin permission model (6 scoped roles, each with explicit permission arrays) maps directly onto NestJS Guard decorators, keeping authorization logic declarative and auditable. TypeScript's type system catches mismatched aggregations at compile time.
 
 ---
 

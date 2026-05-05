@@ -8,7 +8,7 @@
 
 ## Why NestJS
 
-Authentication is about complex, layered logic — OAuth handshakes, token refresh flows, password reset journeys, role assignments. NestJS has a mature, battle-tested authentication ecosystem (Passport.js, Guards, Strategies) that handles all of these patterns cleanly out of the box. Writing the same flows in Go would require building those patterns from scratch; Django's auth system is tightly coupled to its own session model and harder to adapt to a token-based microservice architecture.
+Authentication is about complex, layered logic — OAuth handshakes, token refresh flows, password reset journeys, role assignments. NestJS has a mature, battle-tested authentication ecosystem (Passport.js, Guards, Strategies) that handles all of these patterns cleanly out of the box. Writing the same flows in Go would require building those patterns from scratch.
 
 ---
 

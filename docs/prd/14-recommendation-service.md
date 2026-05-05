@@ -1,14 +1,14 @@
 # Recommendation Service
 
-**Technology:** Django
+**Technology:** NestJS
 **Port:** 8201
 **Priority:** P2 — Enhanced Buyer Experience
 
 ---
 
-## Why Django
+## Why NestJS
 
-Recommendation engines are fundamentally a data science problem — they require statistical modelling, matrix factorisation, similarity scoring, and trend analysis across large datasets of buyer behaviour. Python's ecosystem (scikit-learn, pandas, NumPy, and SciPy) is the gold standard for this type of work and integrates naturally with Django. No other framework in this stack can match the breadth of Python's machine learning libraries. Building collaborative filtering in Go or NestJS would mean writing the algorithms from scratch; in Python they are available, tested, and battle-hardened.
+Recommendation logic is complex business logic with multiple data source aggregation — collaborative filtering, content similarity scoring, trending calculations, and cold-start fallback rules. NestJS's modular DI container keeps each algorithm as an injectable service, making them independently testable and swappable. Bull queues handle scheduled model retraining asynchronously so the API stays responsive. The JS ecosystem provides adequate statistical libraries (`ml-matrix`, `@tensorflow/tfjs-node`) for cosine similarity and matrix operations at portfolio scale. Kafka consumer integration is first-class in NestJS, which is essential since this service trains its models from event streams (purchases, views, ratings).
 
 ---
 

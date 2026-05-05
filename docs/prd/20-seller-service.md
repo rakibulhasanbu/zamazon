@@ -1,14 +1,14 @@
 # Seller Service
 
-**Technology:** Django
+**Technology:** NestJS
 **Port:** 8203
 **Priority:** P3 — Seller & Monetization
 
 ---
 
-## Why Django
+## Why NestJS
 
-The seller service is operations-heavy — it involves complex data views, multi-step workflows (KYC verification, listing approval, payout setup), and rich administrative interfaces. Django REST Framework accelerates building the API layer for these workflows, and Django Admin gives the internal team a powerful, free moderation interface for reviewing and approving seller accounts without building a custom admin UI. Python's data handling capabilities also make seller-facing reporting straightforward. NestJS could handle this but would require building the admin UI entirely from scratch.
+The seller service is operations-heavy — it involves multi-step workflows (KYC verification, listing approval, payout setup) with well-defined state machines. NestJS's decorator-based Guards enforce seller role access at every endpoint, class-validator handles the complex input rules for KYC submissions and payout configurations, and TypeORM manages the relational data across seller profiles, documents, and performance metrics. The KYC lifecycle (pending → under_review → approved/rejected) maps cleanly onto a NestJS state machine pattern. This service is workflow-driven, not throughput-driven, so there is no case for Go here.
 
 ---
 

@@ -1,14 +1,14 @@
 # Analytics Service
 
-**Technology:** Django
+**Technology:** Go
 **Port:** 8202
 **Priority:** P4 — Platform Operations
 
 ---
 
-## Why Django
+## Why Go
 
-Analytics means aggregating large volumes of data into meaningful summaries — totals by day, trends over weeks, rankings by category. Python's pandas library is the best tool available for this type of computation, and it integrates directly into Django. Celery (Python's async task queue) handles scheduled report generation without blocking API responses. The reporting queries in this service are complex GROUP BY aggregations that would be verbose and error-prone to write in Go or NestJS without ORM support.
+Analytics is fundamentally a high-throughput Kafka consumption problem — every `order.completed`, `order.cancelled`, and payment event across the platform flows through this service and must be aggregated in real time. Go's goroutine model handles concurrent event consumption and parallel report computation efficiently without the memory overhead of a Node.js runtime. Complex GROUP BY aggregations are written as raw SQL via `pgx`, which gives full control and avoids ORM limitations on window functions and CTEs. Scheduled report generation runs as goroutines with ticker-based intervals — no external task queue needed. The same performance profile that makes Go the right choice for order-service and payment-service applies here.
 
 ---
 

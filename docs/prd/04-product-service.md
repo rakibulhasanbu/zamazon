@@ -8,7 +8,7 @@
 
 ## Why NestJS
 
-The product catalog is the most relationship-heavy part of the system. A single product has a category, subcategory, multiple variants, dozens of attributes, a seller association, pricing rules, and media links — all interconnected. NestJS with TypeORM and MongoDB handles these rich, flexible document structures cleanly. The catalog also needs complex query building (filter by category + price range + attributes) which TypeORM's query builder handles well. Django could do this but its ORM is slower to iterate with for document-style data; Go would require writing all the query logic manually.
+The product catalog is the most relationship-heavy part of the system. A single product has a category, subcategory, multiple variants, dozens of attributes, a seller association, pricing rules, and media links — all interconnected. NestJS with TypeORM and MongoDB handles these rich, flexible document structures cleanly. The catalog also needs complex query building (filter by category + price range + attributes) which TypeORM's query builder handles well. Go would require writing all the query logic manually.
 
 ---
 
